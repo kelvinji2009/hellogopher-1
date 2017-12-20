@@ -8,6 +8,9 @@ BASE     = $(GOPATH)/src/$(PACKAGE)
 PKGS     = $(or $(PKG),$(shell cd $(BASE) && env GOPATH=$(GOPATH) $(GO) list ./... | grep -v "^$(PACKAGE)/vendor/"))
 TESTPKGS = $(shell env GOPATH=$(GOPATH) $(GO) list -f '{{ if .TestGoFiles }}{{ .ImportPath }}{{ end }}' $(PKGS))
 
+# Explicit GOPATH export for older make support
+export GOPATH
+
 GO      = go
 GODOC   = godoc
 GOFMT   = gofmt
